@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { InvestmentCard } from "./InvestmentCard";
-import { useToast } from "@/components/ui/use-toast";
+import { ClientDetailsForm } from "./ClientDetailsForm";
+import { useToast } from "@/hooks/use-toast";
 import powerwallImage from "@/assets/powerwall.jpg";
 import solarRoofImage from "@/assets/solar-roof.jpg";
 import teslaBotImage from "@/assets/tesla-bot.jpg";
@@ -11,17 +13,17 @@ import cybertruckImage from "@/assets/cybertruck.jpg";
 
 export const InvestmentPackages = () => {
   const { toast } = useToast();
+  const [selectedPackage, setSelectedPackage] = useState<{title: string, price: number} | null>(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
-  const handleBuyPackage = (packageName: string) => {
-    toast({
-      title: "Ready to Invest?",
-      description: `Contact us on WhatsApp to purchase the ${packageName} package. Our team will guide you through the process.`,
-      duration: 5000,
-    });
-    
-    // Open WhatsApp with pre-filled message
-    const message = encodeURIComponent(`Hi! I'm interested in the ${packageName} investment package. Can you help me get started?`);
-    window.open(`https://wa.me/254114470612?text=${message}`, "_blank");
+  const handleBuyPackage = (packageTitle: string, packagePrice: number) => {
+    setSelectedPackage({ title: packageTitle, price: packagePrice });
+    setIsFormOpen(true);
+  };
+
+  const handleCloseForm = () => {
+    setIsFormOpen(false);
+    setSelectedPackage(null);
   };
 
   const packages = [
@@ -163,7 +165,7 @@ export const InvestmentPackages = () => {
               daily={pkg.daily}
               total={pkg.total}
               discount={pkg.discount}
-              onBuy={() => handleBuyPackage(pkg.title)}
+              onBuy={() => handleBuyPackage(pkg.title, pkg.price)}
             />
           ))}
         </div>
@@ -180,6 +182,15 @@ export const InvestmentPackages = () => {
           </button>
         </div>
       </div>
+
+      {selectedPackage && (
+        <ClientDetailsForm
+          isOpen={isFormOpen}
+          onClose={handleCloseForm}
+          packageTitle={selectedPackage.title}
+          packagePrice={selectedPackage.price}
+        />
+      )}
     </section>
   );
 };

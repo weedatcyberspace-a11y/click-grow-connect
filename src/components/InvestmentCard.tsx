@@ -12,7 +12,7 @@ interface InvestmentCardProps {
   daily: number;
   total: number;
   discount?: string;
-  onBuy: () => void;
+  onBuy: (title: string, price: number) => void;
 }
 
 export const InvestmentCard = ({
@@ -89,7 +89,7 @@ export const InvestmentCard = ({
       <Button 
         variant="buy" 
         className="w-full mb-2"
-        onClick={onBuy}
+        onClick={() => onBuy(title, price)}
       >
         🛒 Buy Shares Now
       </Button>
