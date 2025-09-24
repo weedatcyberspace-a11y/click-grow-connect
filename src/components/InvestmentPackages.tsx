@@ -35,7 +35,7 @@ export const InvestmentPackages = () => {
       price: 500,
       originalPrice: 600,
       daily: 25,
-      total: 175,
+      total: 4000, // 500 * 8
       discount: "17% OFF",
     },
     {
@@ -46,7 +46,7 @@ export const InvestmentPackages = () => {
       price: 1000,
       originalPrice: 1200,
       daily: 50,
-      total: 500,
+      total: 8000, // 1000 * 8
       discount: "17% OFF",
     },
     {
@@ -57,7 +57,7 @@ export const InvestmentPackages = () => {
       price: 2000,
       originalPrice: 2400,
       daily: 100,
-      total: 1400,
+      total: 16000, // 2000 * 8
       discount: "17% OFF",
     },
     {
@@ -68,7 +68,7 @@ export const InvestmentPackages = () => {
       price: 3500,
       originalPrice: 4200,
       daily: 175,
-      total: 3675,
+      total: 28000, // 3500 * 8
       discount: "17% OFF",
     },
     {
@@ -79,7 +79,7 @@ export const InvestmentPackages = () => {
       price: 5000,
       originalPrice: 6000,
       daily: 250,
-      total: 7500,
+      total: 40000, // 5000 * 8
       discount: "17% OFF",
     },
     {
@@ -90,7 +90,7 @@ export const InvestmentPackages = () => {
       price: 8000,
       originalPrice: 9600,
       daily: 400,
-      total: 18000,
+      total: 64000, // 8000 * 8
       discount: "17% OFF",
     },
     {
@@ -101,7 +101,7 @@ export const InvestmentPackages = () => {
       price: 12000,
       originalPrice: 14400,
       daily: 600,
-      total: 36000,
+      total: 96000, // 12000 * 8
       discount: "17% OFF",
     },
     {
@@ -112,7 +112,7 @@ export const InvestmentPackages = () => {
       price: 15000,
       originalPrice: 18000,
       daily: 750,
-      total: 22500,
+      total: 120000, // 15000 * 8
       discount: "17% OFF",
     },
     {
@@ -123,7 +123,7 @@ export const InvestmentPackages = () => {
       price: 20000,
       originalPrice: 24000,
       daily: 1000,
-      total: 45000,
+      total: 160000, // 20000 * 8
       discount: "17% OFF",
     },
     {
@@ -134,7 +134,7 @@ export const InvestmentPackages = () => {
       price: 30000,
       originalPrice: 36000,
       daily: 1500,
-      total: 90000,
+      total: 240000, // 30000 * 8
       discount: "17% OFF",
     },
   ];
