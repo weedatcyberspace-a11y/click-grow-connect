@@ -47,6 +47,14 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        investment: {
+          primary: "hsl(var(--investment-primary))",
+          secondary: "hsl(var(--investment-secondary))",
+          success: "hsl(var(--investment-success))",
+          warning: "hsl(var(--investment-warning))",
+          card: "hsl(var(--investment-card))",
+          accent: "hsl(var(--investment-accent))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -57,6 +65,15 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+      },
+      backgroundImage: {
+        'gradient-primary': 'var(--gradient-primary)',
+        'gradient-secondary': 'var(--gradient-secondary)',
+        'gradient-hero': 'var(--gradient-hero)',
+      },
+      boxShadow: {
+        'investment': 'var(--shadow-investment)',
+        'card-investment': 'var(--shadow-card)',
       },
       borderRadius: {
         lg: "var(--radius)",
