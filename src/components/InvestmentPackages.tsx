@@ -11,15 +11,15 @@ import teslaSemiImage from "@/assets/tesla-semi.jpg";
 import cybertruckImage from "@/assets/cybertruck.jpg";
 
 interface InvestmentPackagesProps {
-  onInvest?: (packageData: { title: string; price: number }) => void;
+  onInvest?: (packageData: { title: string; price: number; cycle: string }) => void;
 }
 
 export const InvestmentPackages = ({ onInvest }: InvestmentPackagesProps) => {
   const { toast } = useToast();
 
-  const handleBuyPackage = (packageTitle: string, packagePrice: number) => {
+  const handleBuyPackage = (packageTitle: string, packagePrice: number, cycle: string) => {
     if (onInvest) {
-      onInvest({ title: packageTitle, price: packagePrice });
+      onInvest({ title: packageTitle, price: packagePrice, cycle });
     } else {
       toast({
         title: "Investment Selected",
@@ -36,8 +36,8 @@ export const InvestmentPackages = ({ onInvest }: InvestmentPackagesProps) => {
       available: 15,
       price: 500,
       originalPrice: 600,
-      daily: 57, // (500 * 4) / 7 days = ~286 daily profit, so 57 daily return
-      total: 2000, // 500 * 4 (investment doubled twice)
+      daily: 114, // (500 * 8) / 7 days = ~571 daily profit  
+      total: 4000, // 500 * 8 (doubled then multiplied by 4)
       discount: "17% OFF",
     },
     {
@@ -47,8 +47,8 @@ export const InvestmentPackages = ({ onInvest }: InvestmentPackagesProps) => {
       available: 12,
       price: 1000,
       originalPrice: 1200,
-      daily: 100, // (1000 * 4) / 10 days = 400 daily profit
-      total: 4000, // 1000 * 4
+      daily: 800, // (1000 * 8) / 10 days = 800 daily profit
+      total: 8000, // 1000 * 8
       discount: "17% OFF",
     },
     {
@@ -58,8 +58,8 @@ export const InvestmentPackages = ({ onInvest }: InvestmentPackagesProps) => {
       available: 10,
       price: 2000,
       originalPrice: 2400,
-      daily: 143, // (2000 * 4) / 14 days = ~571 daily profit
-      total: 8000, // 2000 * 4
+      daily: 1143, // (2000 * 8) / 14 days = ~1143 daily profit
+      total: 16000, // 2000 * 8
       discount: "17% OFF",
     },
     {
@@ -69,8 +69,8 @@ export const InvestmentPackages = ({ onInvest }: InvestmentPackagesProps) => {
       available: 8,
       price: 3500,
       originalPrice: 4200,
-      daily: 167, // (3500 * 4) / 21 days = ~667 daily profit
-      total: 14000, // 3500 * 4
+      daily: 1333, // (3500 * 8) / 21 days = ~1333 daily profit
+      total: 28000, // 3500 * 8
       discount: "17% OFF",
     },
     {
@@ -80,8 +80,8 @@ export const InvestmentPackages = ({ onInvest }: InvestmentPackagesProps) => {
       available: 6,
       price: 5000,
       originalPrice: 6000,
-      daily: 167, // (5000 * 4) / 30 days = ~667 daily profit
-      total: 20000, // 5000 * 4
+      daily: 1333, // (5000 * 8) / 30 days = ~1333 daily profit
+      total: 40000, // 5000 * 8
       discount: "17% OFF",
     },
     {
@@ -91,8 +91,8 @@ export const InvestmentPackages = ({ onInvest }: InvestmentPackagesProps) => {
       available: 5,
       price: 8000,
       originalPrice: 9600,
-      daily: 178, // (8000 * 4) / 45 days = ~711 daily profit
-      total: 32000, // 8000 * 4
+      daily: 1422, // (8000 * 8) / 45 days = ~1422 daily profit
+      total: 64000, // 8000 * 8
       discount: "17% OFF",
     },
     {
@@ -102,8 +102,8 @@ export const InvestmentPackages = ({ onInvest }: InvestmentPackagesProps) => {
       available: 4,
       price: 12000,
       originalPrice: 14400,
-      daily: 200, // (12000 * 4) / 60 days = 800 daily profit
-      total: 48000, // 12000 * 4
+      daily: 1600, // (12000 * 8) / 60 days = 1600 daily profit
+      total: 96000, // 12000 * 8
       discount: "17% OFF",
     },
     {
@@ -113,8 +113,8 @@ export const InvestmentPackages = ({ onInvest }: InvestmentPackagesProps) => {
       available: 3,
       price: 15000,
       originalPrice: 18000,
-      daily: 500, // (15000 * 4) / 30 days = 2000 daily profit
-      total: 60000, // 15000 * 4
+      daily: 4000, // (15000 * 8) / 30 days = 4000 daily profit
+      total: 120000, // 15000 * 8
       discount: "17% OFF",
     },
     {
@@ -124,8 +124,8 @@ export const InvestmentPackages = ({ onInvest }: InvestmentPackagesProps) => {
       available: 2,
       price: 20000,
       originalPrice: 24000,
-      daily: 533, // (20000 * 4) / 45 days = ~1778 daily profit
-      total: 80000, // 20000 * 4
+      daily: 3556, // (20000 * 8) / 45 days = ~3556 daily profit
+      total: 160000, // 20000 * 8
       discount: "17% OFF",
     },
     {
@@ -135,8 +135,8 @@ export const InvestmentPackages = ({ onInvest }: InvestmentPackagesProps) => {
       available: 2,
       price: 30000,
       originalPrice: 36000,
-      daily: 500, // (30000 * 4) / 60 days = 2000 daily profit
-      total: 120000, // 30000 * 4
+      daily: 4000, // (30000 * 8) / 60 days = 4000 daily profit
+      total: 240000, // 30000 * 8
       discount: "17% OFF",
     },
   ];
@@ -167,7 +167,7 @@ export const InvestmentPackages = ({ onInvest }: InvestmentPackagesProps) => {
               daily={pkg.daily}
               total={pkg.total}
               discount={pkg.discount}
-              onBuy={() => handleBuyPackage(pkg.title, pkg.price)}
+              onBuy={() => handleBuyPackage(pkg.title, pkg.price, pkg.cycle)}
             />
           ))}
         </div>

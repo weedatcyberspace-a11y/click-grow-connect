@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface LoginFormProps {
   onLogin: (userData: { email: string; name: string }) => void;
@@ -18,7 +19,9 @@ export const LoginForm = ({ onLogin }: LoginFormProps) => {
   });
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.email || !formData.password || (formData.isSignUp && !formData.name)) {
@@ -30,18 +33,50 @@ export const LoginForm = ({ onLogin }: LoginFormProps) => {
       return;
     }
 
-    // Mock login/signup - in real app this would connect to backend
-    const userData = {
-      email: formData.email,
-      name: formData.name || formData.email.split('@')[0],
-    };
+    setLoading(true);
+    
+    try {
+      if (formData.isSignUp) {
+        const { error } = await supabase.auth.signUp({
+          email: formData.email,
+          password: formData.password,
+          options: {
+            emailRedirectTo: `${window.location.origin}/`,
+            data: {
+              first_name: formData.name
+            }
+          }
+        });
 
-    toast({
-      title: formData.isSignUp ? "Account Created" : "Login Successful",
-      description: `Welcome ${userData.name}!`,
-    });
+        if (error) throw error;
 
-    onLogin(userData);
+        toast({
+          title: "Account Created",
+          description: "Please check your email to verify your account",
+        });
+      } else {
+        const { error } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password,
+        });
+
+        if (error) throw error;
+
+        toast({
+          title: "Login Successful",
+          description: "Welcome back!",
+        });
+      }
+    } catch (error: any) {
+      console.error('Auth error:', error);
+      toast({
+        title: "Error",
+        description: error.message || "Authentication failed",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -97,8 +132,8 @@ export const LoginForm = ({ onLogin }: LoginFormProps) => {
               />
             </div>
 
-            <Button type="submit" className="w-full">
-              {formData.isSignUp ? "Create Account" : "Login"}
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Processing..." : (formData.isSignUp ? "Create Account" : "Login")}
             </Button>
 
             <Button

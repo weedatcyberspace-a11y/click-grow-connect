@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      investments: {
+        Row: {
+          created_at: string
+          expected_return: number
+          id: string
+          invested_amount: number
+          investment_date: string
+          maturity_date: string
+          package_title: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expected_return: number
+          id?: string
+          invested_amount: number
+          investment_date?: string
+          maturity_date: string
+          package_title: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          expected_return?: number
+          id?: string
+          invested_amount?: number
+          investment_date?: string
+          maturity_date?: string
+          package_title?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       jobs: {
         Row: {
           company: string | null
@@ -263,6 +302,39 @@ export type Database = {
         }
         Relationships: []
       }
+      transactions: {
+        Row: {
+          amount: number
+          created_at: string
+          description: string
+          id: string
+          status: string
+          type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          description: string
+          id?: string
+          status?: string
+          type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          description?: string
+          id?: string
+          status?: string
+          type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_subscriptions: {
         Row: {
           created_at: string
@@ -346,6 +418,22 @@ export type Database = {
       }
       complete_task: {
         Args: { task_id_param: string }
+        Returns: Json
+      }
+      create_investment: {
+        Args: {
+          cycle_days_param: number
+          invested_amount_param: number
+          package_title_param: string
+        }
+        Returns: Json
+      }
+      process_deposit: {
+        Args: { amount_param: number }
+        Returns: Json
+      }
+      process_withdrawal: {
+        Args: { amount_param: number }
         Returns: Json
       }
     }
